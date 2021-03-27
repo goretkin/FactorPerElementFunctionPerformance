@@ -41,6 +41,24 @@ function bar2(a)
     return a[3] + one(T)
 end
 
+function foo3(f, a)
+    r = nothing
+    for x in a
+        y = f(x)
+        if r === nothing
+            r = y
+        else
+            r += y
+        end
+    end
+    return r
+end
+
+function bar3(f, a)
+    T = fieldtype(eltype(typeof(a)), :field)
+    return f(a[3]) + one(T)
+end
+
 a = [(field=i,) for i = 1:5]
 b = ((field=i,) for i in Iterators.TakeWhile(<=(5), Iterators.Count(1,1)))  # has `Any` `eltype`
 c = Iterators.TakeWhile(x->true, a) # has an `eltype`
@@ -141,4 +159,11 @@ for (abc, abc_s) = zip((a1000, b1000, c1000), (:a, :b, :c))
 
     println("\n\nfactored")
     show(stdout, "text/plain", b); println(stdout)
+
+    b = B[(abc_s, :predicate)] = @benchmark foo3(Base.Fix2(getfield, :field), $abc)
+
+    println("\n\npredicate")
+    show(stdout, "text/plain", b); println(stdout)
 end
+
+display(B)
