@@ -1,0 +1,4 @@
+name = "FactoredElementFunction"
+uuid = "42b1b709-83ca-446f-9bcc-67afba14f5e0"
+authors = ["Gustavo Goretkin <gustavo.goretkin@gmail.com>"]
+version = "0.1.0"
