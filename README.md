@@ -1,0 +1,1 @@
+See https://discourse.julialang.org/t/factor-out-field-access-of-abstractarray-and-or-iterator-interface/41493
